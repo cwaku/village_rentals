@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Village Rentals</title> 
+  <title>Village Rentals</title>
   <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
   <header class="app-header">
-    <h1>Village Rentals</h1>
+    <h1><a href="/">Village Rentals</a></h1>
     <nav>
       <a href="/">Home</a>
       <a href="/equipment.html">Equipment</a>
@@ -15,17 +16,30 @@
       <a href="/rentals.html">Rentals</a>
     </nav>
   </header>
+
   <main>
-    <div class="welcome_Sign">
+    <div class="welcome_sign">
       <h2>Welcome to Village Rentals</h2>
       <p>Manage your equipment inventory, customers, and rentals all in one place.</p>
     </div>
-    
-    <ul>
-      <li><a href="/equipment.html">Manage equipment</a> (Member 1)</li>
-      <li><a href="/customers.html">Manage customers</a> (Member 2)</li>
-      <li><a href="/rentals.html">Process rentals</a> (Member 3)</li>
-    </ul>
+
+    <div class="grid-boxes">
+      <a class="box" href="/equipment.html">
+        <span class="box-title">Equipment</span>
+        <span class="box-description">Manage your equipment inventory</span>
+      </a>
+      <a class="box" href="/customers.html">
+        <span class="box-title">Customers</span>
+        <span class="box-description">View and manage customer information</span>
+      </a>
+      <a class="box" href="/rentals.html">
+        <span class="box-title">Rentals</span>
+        <span class="box-description">Process equipment rentals</span>
+      </a>
+    </div>
+
+
   </main>
+
 </body>
 </html>
