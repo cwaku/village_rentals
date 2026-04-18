@@ -7,6 +7,7 @@
 //   PATCH  /api/customers/:id        update fields
 // Remember: the rental flow needs to check is_banned before allowing a rental,
 // and needs to read has_discount to apply the 10% discount at rental time.
+import { getDb, query, run } from '../db.js';
 import { Router } from 'express';
 import { ok } from '../util.js';
 

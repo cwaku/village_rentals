@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3';
+import initSqlJs from 'sql.js';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -11,11 +11,13 @@ const seedPath = path.join(repoRoot, 'db', 'seed.sql');
 
 if (fs.existsSync(dbPath)) {
   fs.unlinkSync(dbPath);
-  console.log(`Removed existing ${dbPath}`);
+  console.log(`Removed existing database at ${dbPath}`);
 }
 
-const db = new Database(dbPath);
-db.pragma('journal_mode = WAL');
+const SQL = await initSqlJs();
+const db = new SQL.Database();
+
+db.run('PRAGMA foreign_keys = ON;');
 
 const schemaSql = fs.readFileSync(schemaPath, 'utf8');
 db.exec(schemaSql);
@@ -25,9 +27,13 @@ const seedSql = fs.readFileSync(seedPath, 'utf8');
 db.exec(seedSql);
 console.log('Seed data loaded.');
 
-const categoryCount = db.prepare('SELECT COUNT(*) AS n FROM categories').get().n;
-const equipmentCount = db.prepare('SELECT COUNT(*) AS n FROM equipment').get().n;
-console.log(`Categories: ${categoryCount}, Equipment: ${equipmentCount}`);
+const counts = ['categories', 'equipment', 'customers', 'rentals', 'rental_items'];
+for (const table of counts) {
+  const [{ n }] = db.exec(`SELECT COUNT(*) AS n FROM ${table}`)[0].values.map(([n]) => ({ n }));
+  console.log(`  ${table}: ${n} rows`);
+}
 
+const data = db.export();
+fs.writeFileSync(dbPath, Buffer.from(data));
 db.close();
-console.log(`Database initialized at ${dbPath}`);
+console.log(`\nDatabase initialized at ${dbPath}`);

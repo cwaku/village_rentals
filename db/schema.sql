@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 
 CREATE TABLE IF NOT EXISTS equipment (
-  equipment_id  INTEGER PRIMARY KEY,
+  equipment_id  INTEGER PRIMARY KEY AUTOINCREMENT,
   category_id   INTEGER NOT NULL REFERENCES categories(category_id),
   name          TEXT NOT NULL,
   description   TEXT,

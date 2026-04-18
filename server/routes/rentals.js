@@ -10,6 +10,7 @@
 //   - Compute cost per item = daily_rate * number_of_days (return_date - rental_date).
 //   - Sum item costs -> total_cost; if customer.has_discount, multiply by 0.9.
 //   - In a db.transaction: INSERT rental, INSERT each rental_item, UPDATE equipment.status = 'RENTED'.
+import { getDb, query, run } from '../db.js';
 import { Router } from 'express';
 import { ok } from '../util.js';
 
