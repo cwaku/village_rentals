@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipment — Village Rentals</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <h1>Village Rentals</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/equipment.html" class="active">Equipment</a>
+      <a href="/customers.html">Customers</a>
+      <a href="/rentals.html">Rentals</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Equipment</h2>
+
+    <div id="error-banner" class="error-banner" hidden></div>
+
+    <div class="toolbar">
+      <button id="add-btn" class="primary" type="button">+ Add Equipment</button>
+      <div class="spacer"></div>
+      <label>
+        Status filter:
+        <select id="status-filter">
+          <option value="">All</option>
+          <option value="AVAILABLE">Available</option>
+          <option value="RENTED">Rented</option>
+          <option value="SOLD">Sold</option>
+          <option value="DAMAGED">Damaged</option>
+        </select>
+      </label>
+    </div>
+
+    <table id="equipment-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Description</th>
+          <th>Daily Rate</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="equipment-tbody"></tbody>
+    </table>
+
+    <div id="empty-state" class="empty-state" hidden>No equipment matches this filter.</div>
+  </main>
+
+  <dialog id="add-dialog">
+    <h2>Add Equipment</h2>
+    <form id="add-form" method="dialog">
+      <label>
+        Name
+        <input type="text" name="name" required maxlength="120">
+      </label>
+      <label>
+        Category
+        <select name="category_id" id="category-select" required></select>
+      </label>
+      <label>
+        Description
+        <textarea name="description" rows="2" maxlength="500"></textarea>
+      </label>
+      <label>
+        Daily rate ($)
+        <input type="number" name="daily_rate" step="0.01" min="0" required>
+      </label>
+      <div id="form-error" class="error-banner" hidden></div>
+      <div class="form-actions">
+        <button type="button" id="cancel-btn">Cancel</button>
+        <button type="submit" class="primary">Add</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/equipment.js"></script>
+</body>
+</html>
