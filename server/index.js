@@ -3,6 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import equipmentRouter from './routes/equipment.js';
 import categoriesRouter from './routes/categories.js';
+import customersRouter from './routes/customers.js';
+import rentalsRouter from './routes/rentals.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(__dirname, '..', 'public');
@@ -13,8 +15,8 @@ app.use(express.static(publicDir));
 
 app.use('/api/equipment', equipmentRouter);
 app.use('/api/categories', categoriesRouter);
-// app.use('/api/customers', customersRouter);    // Member 2
-// app.use('/api/rentals', rentalsRouter);        // Member 3
+app.use('/api/customers', customersRouter);
+app.use('/api/rentals', rentalsRouter);
 
 app.use('/api', (req, res) => {
   res.status(404).json({ error: `API endpoint not found: ${req.method} ${req.originalUrl}` });
