@@ -1,22 +1,22 @@
-async function request(method, path, body) {
-  const init = { method, headers: {} };
-  if (body !== undefined) {
-    init.headers['Content-Type'] = 'application/json';
-    init.body = JSON.stringify(body);
-  }
-  const res = await fetch(path, init);
-  const text = await res.text();
-  const data = text ? JSON.parse(text) : null;
+async function request(method, url, body) {
+  const options = {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+  };
+  if (body !== undefined) options.body = JSON.stringify(body);
+
+  const res = await fetch(url, options);
+  const data = await res.json();
   if (!res.ok) {
-    const message = (data && data.error) ? data.error : `HTTP ${res.status}`;
-    throw new Error(message);
+    throw new Error(data.error || `HTTP ${res.status}`);
   }
   return data;
 }
 
+
 export const api = {
-  get:    (path)       => request('GET',    path),
-  post:   (path, body) => request('POST',   path, body),
-  patch:  (path, body) => request('PATCH',  path, body),
-  delete: (path)       => request('DELETE', path),
+  get:    (url)       => request('GET',    url),
+  post:   (url, body) => request('POST',   url, body),
+  patch:  (url, body) => request('PATCH',  url, body),
+  delete: (url)       => request('DELETE', url),
 };

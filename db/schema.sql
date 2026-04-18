@@ -2,7 +2,7 @@
 -- Member 1 owns this file's structure and the categories + equipment tables.
 -- Members 2 and 3 APPEND their tables below the marked sections.
 
-PRAGMA foreign_keys = ON;
+-- PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS categories (
   category_id   INTEGER PRIMARY KEY,

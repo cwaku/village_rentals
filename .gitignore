@@ -15,11 +15,3 @@ Thumbs.db
 .idea/
 *.swp
 *.log
-
-# Claude / brainstorming artifacts (never committed)
-.claude/
-CLAUDE.md
-docs/superpowers/
-specs/
-*.claude-plan.md
-.aider*
