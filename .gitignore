@@ -1,0 +1,25 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Database (rebuilt from schema.sql + seed.sql)
+db/*.db
+db/*.db-journal
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.log
+
+# Claude / brainstorming artifacts (never committed)
+.claude/
+CLAUDE.md
+docs/superpowers/
+specs/
+*.claude-plan.md
+.aider*
