@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import equipmentRouter from './routes/equipment.js';
+import categoriesRouter from './routes/categories.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(__dirname, '..', 'public');
@@ -9,9 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(express.static(publicDir));
 
-// Routes mounted in later tasks:
-// app.use('/api/equipment', equipmentRouter);
-// app.use('/api/categories', categoriesRouter);
+app.use('/api/equipment', equipmentRouter);
+app.use('/api/categories', categoriesRouter);
 // app.use('/api/customers', customersRouter);    // Member 2
 // app.use('/api/rentals', rentalsRouter);        // Member 3
 
