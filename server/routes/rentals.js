@@ -146,26 +146,26 @@ router.post('/', async (req, res, next) => {
     // Transaction: insert rental, items, update equipment status
     db.run('BEGIN');
     transactionStarted = true;
- 
-    run(db,
+
+    db.run(
       'INSERT INTO rentals (customer_id, date_created, rental_date, return_date, total_cost) VALUES (?, ?, ?, ?, ?)',
       [customer_id, dateCreated, rental_date, return_date, totalCost]
     );
- 
+
     const rentalIdRow = query(db, 'SELECT last_insert_rowid() AS rental_id');
     const rentalId = rentalIdRow[0].rental_id;
- 
+
     for (const item of itemCosts) {
-      run(db,
+      db.run(
         'INSERT INTO rental_items (rental_id, equipment_id, cost) VALUES (?, ?, ?)',
         [rentalId, item.equipment_id, Number(item.cost.toFixed(2))]
       );
-      run(db,
+      db.run(
         "UPDATE equipment SET status = 'RENTED' WHERE equipment_id = ?",
         [item.equipment_id]
       );
     }
- 
+
     db.run('COMMIT');
     transactionStarted = false;
     saveDb();
