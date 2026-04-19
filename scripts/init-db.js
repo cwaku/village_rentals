@@ -50,7 +50,7 @@ execFile(seedPath);
 console.log('Seed data loaded.');
  
 // Add 'customers', 'rentals', 'rental_items' once Members 2 & 3 are done
-for (const table of ['categories', 'equipment']) {
+for (const table of ['categories', 'equipment', 'customers', 'rentals', 'rental_items']) {
   const result = db.exec(`SELECT COUNT(*) FROM ${table}`);
   const count  = result[0].values[0][0];
   console.log(`  ${table}: ${count} rows`);
