@@ -1,6 +1,17 @@
 -- Village Rentals — database schema
 -- Member 1 owns this file's structure and the categories + equipment tables.
 -- Members 2 and 3 APPEND their tables below the marked sections.
+CREATE TABLE IF NOT EXISTS customers (
+  customer_id   INTEGER PRIMARY KEY,
+  last_name     TEXT NOT NULL,
+  first_name    TEXT NOT NULL,
+  contact_phone TEXT,
+  email         TEXT,
+  is_banned     INTEGER NOT NULL DEFAULT 0
+                CHECK (is_banned IN (0, 1)),
+  has_discount  INTEGER NOT NULL DEFAULT 0
+                CHECK (has_discount IN (0, 1))
+);
 
 PRAGMA foreign_keys = ON;
 
