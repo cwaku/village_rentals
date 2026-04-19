@@ -51,3 +51,19 @@ CREATE TABLE IF NOT EXISTS customers (
 --   rental_items(rental_item_id PK, rental_id FK -> rentals,
 --                equipment_id FK -> equipment, cost REAL)
 -- ============================================================
+
+CREATE TABLE IF NOT EXISTS rentals (
+    rental_id     INTEGER PRIMARY KEY,
+    customer_id   INTEGER NOT NULL REFERENCES customers(customer_id),
+    date_created  TEXT NOT NULL,
+    rental_date   TEXT NOT NULL,
+    return_date   TEXT NOT NULL,
+    total_cost    REAL NOT NULL CHECK (total_cost >= 0)
+    );
+
+CREATE TABLE IF NOT EXISTS rental_items (
+    rental_item_id INTEGER PRIMARY KEY,
+     rental_id     INTEGER NOT NULL REFERENCES rentals(rental_id) ON DELETE CASCADE,
+    equipment_id   INTEGER NOT NULL REFERENCES equipment(equipment_id),
+    cost           REAL NOT NULL CHECK (cost >= 0)
+    );
