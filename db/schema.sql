@@ -30,7 +30,17 @@ CREATE TABLE IF NOT EXISTS equipment (
 --   is_banned     INTEGER NOT NULL DEFAULT 0,
 --   has_discount  INTEGER NOT NULL DEFAULT 0
 -- ============================================================
-
+CREATE TABLE IF NOT EXISTS customers (
+  customer_id   INTEGER PRIMARY KEY,
+  last_name     TEXT NOT NULL,
+  first_name    TEXT NOT NULL,
+  contact_phone TEXT,
+  email         TEXT,
+  is_banned     INTEGER NOT NULL DEFAULT 0
+                CHECK (is_banned IN (0, 1)),
+  has_discount  INTEGER NOT NULL DEFAULT 0
+                CHECK (has_discount IN (0, 1))
+);
 
 -- ============================================================
 -- Member 3: append `rentals` and `rental_items` tables below this line.
