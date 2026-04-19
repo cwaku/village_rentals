@@ -25,7 +25,10 @@ INSERT INTO equipment (equipment_id, category_id, name, description, daily_rate,
 --   (1003, 'Lee',   'Michael', '(555) 555-5656', 'ml@sample.net', 0, 0)
 -- (set is_banned / has_discount flags as you see fit for demo purposes)
 -- ============================================================
-
+INSERT INTO customers (customer_id, last_name, first_name, contact_phone, email, is_banned, has_discount) VALUES
+  (1001, 'Doe',   'John',    '(555) 555-1212', 'jd@sample.net', 0, 0),
+  (1002, 'Smith', 'Jane',    '(555) 555-3434', 'js@live.com',   0, 1),
+  (1003, 'Lee',   'Michael', '(555) 555-5656', 'ml@sample.net', 1, 0);
 
 -- ============================================================
 -- Member 3: append rental + rental_item INSERTs below this line.
@@ -33,3 +36,15 @@ INSERT INTO equipment (equipment_id, category_id, name, description, daily_rate,
 --   (1000, '02/15/2024', 1001, equipment 201, 02/20 - 02/23, 149.97)
 --   (1001, '02/16/2024', 1002, equipment 501, 02/21 - 02/25,  43.96)
 -- ============================================================
+
+INSERT INTO rentals (rental_id, customer_id, date_created, rental_date, return_date, total_cost) VALUES
+        (1000, 1001, '2024-02-15', '2024-02-20', '2024-02-23', 149.97),
+        (1001, 1002, '2024-02-16', '2024-02-21', '2024-02-25', 43.96);
+
+INSERT INTO rental_items (rental_item_id, rental_id, equipment_id, cost) VALUES
+        (1, 1000, 201, 149.97),
+        (2, 1001, 501, 43.96);
+
+UPDATE equipment
+SET status = 'RENTED'
+WHERE equipment_id IN (201, 501);

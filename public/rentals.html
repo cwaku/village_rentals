@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <title>Rentals — Village Rentals</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <!-- Link: https://unsplash.com/illustrations/a-simple-blue-shopping-cart-icon-7-1CXVNxApQ -->
+  <link rel="icon" type="image/png" href="/img/tab_icon.png">
 </head>
 <body>
   <header class="app-header">
-    <h1>Village Rentals</h1>
+    <h1><a href="/">Village Rentals</a></h1>
     <nav>
       <a href="/">Home</a>
       <a href="/equipment.html">Equipment</a>
@@ -15,11 +17,67 @@
       <a href="/rentals.html" class="active">Rentals</a>
     </nav>
   </header>
+ 
   <main>
     <h2>Rentals</h2>
-    <p><em>Member 3 — implement this page. Use <code>public/equipment.html</code> + <code>public/equipment.js</code> as a template.</em></p>
-    <p>Required features: process a rental (link customer, check ban, add items, set dates, compute total with optional discount, mark equipment RENTED).</p>
-    <script type="module" src="/rentals.js"></script>
+ 
+    <div id="message"></div>
+ 
+    <div class="rental-panels">
+ 
+      <!-- Left: New Rental Form -->
+      <div class="panel">
+        <h3>Process New Rental</h3>
+        <form id="rental-form">
+ 
+          <div class="form-field">
+            <label for="customer-select">Customer *</label>
+            <select id="customer-select" required>
+              <option value="">Select a customer</option>
+            </select>
+            <div id="customer-status"></div>
+          </div>
+ 
+          <div class="form-field">
+            <label for="rental-date">Rental Date *</label>
+            <input id="rental-date" type="date" required>
+          </div>
+ 
+          <div class="form-field">
+            <label for="return-date">Return Date *</label>
+            <input id="return-date" type="date" required>
+          </div>
+ 
+          <div class="form-field">
+            <label>Equipment Items *</label>
+            <div id="items-container"></div>
+            <button type="button" id="add-item-btn" style="margin-top:6px; width:100%">+ Add Item</button>
+          </div>
+ 
+          <div class="summary-box">
+            <span id="days-output">Rental days: 0</span>
+            <span id="total-output">Total: $0.00</span>
+          </div>
+ 
+          <button type="submit" id="submit-btn" class="primary" style="width:100%">
+            Confirm Rental
+          </button>
+ 
+        </form>
+      </div>
+ 
+      <!-- Right: Existing Rentals -->
+      <div class="panel">
+        <h3>Existing Rentals</h3>
+        <div id="rentals-list">
+          <p style="color:var(--muted)">Loading…</p>
+        </div>
+      </div>
+ 
+    </div>
   </main>
+  <script type="module" src="/rentals.js"></script>
+
+
 </body>
 </html>

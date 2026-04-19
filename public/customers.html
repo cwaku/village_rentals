@@ -4,10 +4,12 @@
   <meta charset="UTF-8">
   <title>Customers — Village Rentals</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <!-- Link: https://unsplash.com/illustrations/a-simple-blue-shopping-cart-icon-7-1CXVNxApQ -->
+  <link rel="icon" type="image/png" href="/img/tab_icon.png">
 </head>
 <body>
   <header class="app-header">
-    <h1>Village Rentals</h1>
+    <h1><a href="/">Village Rentals</a></h1>
     <nav>
       <a href="/">Home</a>
       <a href="/equipment.html">Equipment</a>
@@ -16,10 +18,77 @@
     </nav>
   </header>
   <main>
-    <h2>Customers</h2>
-    <p><em>Member 2 — implement this page. Use <code>public/equipment.html</code> + <code>public/equipment.js</code> as a template.</em></p>
-    <p>Required features: add customer, update customer, display all customers, ban flag, 10% discount flag.</p>
-    <script type="module" src="/customers.js"></script>
+
+    <div id="error-banner" class="error-banner" hidden></div>
+
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Search by name or email…" style="width:220px">
+      <span class="spacer"></span>
+      <button id="btn-add" class="primary">+ Add Customer</button>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Email</th>
+          <th>Flags</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="customers-tbody">
+        <tr>
+          <td colspan="6" class="empty-state">Loading…</td>
+        </tr>
+      </tbody>
+    </table>
+
   </main>
+
+  <dialog id="customer-dialog">
+    <h2 id="dialog-title">Add New Customer</h2>
+    <form id="customer-form" method="dialog">
+      <input type="hidden" id="f-id">
+
+      <label>
+        First Name *
+        <input id="f-first" type="text" required maxlength="80">
+      </label>
+
+      <label>
+        Last Name *
+        <input id="f-last" type="text" required maxlength="80">
+      </label>
+
+      <label>
+        Phone
+        <input id="f-phone" type="text" maxlength="30" placeholder="(555) 555-0000">
+      </label>
+
+      <label>
+        Email
+        <input id="f-email" type="email" maxlength="120">
+      </label>
+
+      <label style="flex-direction:row; align-items:center; gap:8px;">
+        <input id="f-banned" type="checkbox">
+        Banned (blocks all rentals)
+      </label>
+
+      <label style="flex-direction:row; align-items:center; gap:8px;">
+        <input id="f-discount" type="checkbox">
+        10% discount at rental
+      </label>
+
+      <div class="form-actions">
+        <button type="button" id="btn-cancel">Cancel</button>
+        <button type="submit" class="primary">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script type="module" src="/customers.js"></script>
 </body>
 </html>

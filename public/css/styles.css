@@ -11,9 +11,64 @@
   --warn: #a56600;
 }
 
-* { box-sizing: border-box; }
+.grid-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
 
-html, body {
+.box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 28px 24px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: box-shadow 0.15s;
+}
+
+.box:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.box .box-title {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.box .box-description {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.welcome_sign {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 8px;
+}
+
+.welcome_sign h2 {
+  margin: 0 0 6px;
+}
+
+.welcome_sign p {
+  margin: 0;
+  color: var(--muted);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
   background: var(--bg);
@@ -37,6 +92,17 @@ header.app-header h1 {
   font-size: 18px;
 }
 
+header.app-header h1 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+header.app-header nav {
+  /* Shift nav bar to the right */
+  margin-left: auto;
+  margin-right: 80px;
+}
+
 header.app-header nav a {
   color: var(--muted);
   text-decoration: none;
@@ -46,6 +112,12 @@ header.app-header nav a {
 header.app-header nav a:hover,
 header.app-header nav a.active {
   color: var(--accent);
+  text-decoration: underline;
+}
+
+div.welcome_sign {
+  /* center text */
+  text-align: center;
 }
 
 main {
@@ -61,9 +133,12 @@ main {
   margin-bottom: 16px;
 }
 
-.toolbar .spacer { flex: 1; }
+.toolbar .spacer {
+  flex: 1;
+}
 
-button, .btn {
+button,
+.btn {
   font: inherit;
   padding: 6px 14px;
   border: 1px solid var(--border);
@@ -73,20 +148,36 @@ button, .btn {
   cursor: pointer;
 }
 
-button:hover:not(:disabled) { background: #eef1f6; }
-button:disabled { opacity: 0.5; cursor: not-allowed; }
+button:hover:not(:disabled) {
+  background: #eef1f6;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 button.primary {
   background: var(--accent);
   border-color: var(--accent);
   color: #fff;
 }
-button.primary:hover:not(:disabled) { background: var(--accent-hover); }
 
-button.danger { color: var(--danger); }
-button.warn   { color: var(--warn); }
+button.primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+}
 
-select, input, textarea {
+button.danger {
+  color: var(--danger);
+}
+
+button.warn {
+  color: var(--warn);
+}
+
+select,
+input,
+textarea {
   font: inherit;
   padding: 6px 10px;
   border: 1px solid var(--border);
@@ -104,7 +195,8 @@ table {
   overflow: hidden;
 }
 
-th, td {
+th,
+td {
   padding: 8px 12px;
   text-align: left;
   border-bottom: 1px solid var(--border);
@@ -119,7 +211,9 @@ th {
   color: var(--muted);
 }
 
-tbody tr:last-child td { border-bottom: none; }
+tbody tr:last-child td {
+  border-bottom: none;
+}
 
 .status-pill {
   display: inline-block;
@@ -129,10 +223,26 @@ tbody tr:last-child td { border-bottom: none; }
   background: #eef1f6;
   color: var(--muted);
 }
-.status-pill.AVAILABLE { background: #e6f4ea; color: var(--success); }
-.status-pill.RENTED    { background: #e6ecf9; color: var(--accent); }
-.status-pill.SOLD      { background: #f4e6e6; color: var(--danger); }
-.status-pill.DAMAGED   { background: #f7ecd6; color: var(--warn); }
+
+.status-pill.AVAILABLE {
+  background: #e6f4ea;
+  color: var(--success);
+}
+
+.status-pill.RENTED {
+  background: #e6ecf9;
+  color: var(--accent);
+}
+
+.status-pill.SOLD {
+  background: #f4e6e6;
+  color: var(--danger);
+}
+
+.status-pill.DAMAGED {
+  background: #f7ecd6;
+  color: var(--warn);
+}
 
 dialog {
   border: 1px solid var(--border);
@@ -140,12 +250,41 @@ dialog {
   padding: 20px;
   min-width: 360px;
 }
-dialog::backdrop { background: rgba(0, 0, 0, 0.35); }
-dialog h2 { margin-top: 0; }
-dialog form { display: grid; gap: 10px; }
-dialog label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: var(--muted); }
-dialog label input, dialog label select, dialog label textarea { font-size: 15px; color: var(--text); }
-dialog .form-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; }
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+
+dialog h2 {
+  margin-top: 0;
+}
+
+dialog form {
+  display: grid;
+  gap: 10px;
+}
+
+dialog label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+dialog label input,
+dialog label select,
+dialog label textarea {
+  font-size: 15px;
+  color: var(--text);
+}
+
+dialog .form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 8px;
+}
 
 .error-banner {
   background: #fbe6e6;
@@ -160,4 +299,99 @@ dialog .form-actions { display: flex; justify-content: flex-end; gap: 8px; margi
   text-align: center;
   padding: 32px;
   color: var(--muted);
+}
+
+.rental-item-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.rental-item-row select {
+  flex: 1;
+}
+
+.remove-item-btn {
+  color: var(--danger);
+}
+
+.rental-panels {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+@media (max-width: 700px) {
+  .rental-panels {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px 24px;
+}
+
+.panel h3 {
+  margin: 0 0 16px;
+  font-size: 16px;
+}
+
+.summary-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 24px;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  font-size: 15px;
+}
+
+#days-output {
+  color: var(--muted);
+}
+
+#total-output {
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--accent);
+}
+
+#customer-status {
+  font-size: 13px;
+  margin-top: 6px;
+  min-height: 18px;
+}
+
+#message {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  min-height: 20px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.form-field input,
+.form-field select {
+  font-size: 15px;
+  color: var(--text);
+}
+
+#rentals-list table {
+  margin-top: 0;
 }

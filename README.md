@@ -6,16 +6,12 @@ Prototype for Part B of the CPSY 200 Final Project. Implements a basic inventory
 
 - **Runtime:** Node.js 18+
 - **Server:** Express 4
-- **Database:** SQLite (via `better-sqlite3`), seeded from `db/seed.sql`
+- **Database:** SQLite (via `sql.js`), seeded from `db/seed.sql`
 - **Frontend:** vanilla HTML + CSS + ES modules (no framework, no bundler)
 
 ## Prerequisites
 
 - Node.js 18 or newer (`node --version`)
-- A build toolchain for `better-sqlite3` native compile:
-  - **Linux:** `sudo apt install build-essential python3` (Debian/Ubuntu) or `sudo pacman -S base-devel python` (Arch)
-  - **macOS:** Xcode Command Line Tools (`xcode-select --install`)
-  - **Windows:** Visual Studio Build Tools
 
 ## How to Run
 

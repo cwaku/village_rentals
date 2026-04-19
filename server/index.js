@@ -1,10 +1,12 @@
 import express from 'express';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getDb } from './db.js';
 import equipmentRouter from './routes/equipment.js';
 import categoriesRouter from './routes/categories.js';
 import customersRouter from './routes/customers.js';
 import rentalsRouter from './routes/rentals.js';
+import { get } from 'node:http';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const publicDir = path.resolve(__dirname, '..', 'public');
@@ -28,6 +30,12 @@ app.use((err, req, res, next) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Village Rentals server running at http://localhost:${port}`);
+getDb().then(() => {
+  app.listen(port, () => {
+    console.log(`Village Rentals server running at http://localhost:${port}`);
+  });
+}).catch(err => {
+  console.error('Failed to initialize database:', err);
+  process.exit(1);
 });
+

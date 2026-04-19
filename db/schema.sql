@@ -2,7 +2,7 @@
 -- Member 1 owns this file's structure and the categories + equipment tables.
 -- Members 2 and 3 APPEND their tables below the marked sections.
 
-PRAGMA foreign_keys = ON;
+-- PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS categories (
   category_id   INTEGER PRIMARY KEY,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS categories (
 );
 
 CREATE TABLE IF NOT EXISTS equipment (
-  equipment_id  INTEGER PRIMARY KEY,
+  equipment_id  INTEGER PRIMARY KEY AUTOINCREMENT,
   category_id   INTEGER NOT NULL REFERENCES categories(category_id),
   name          TEXT NOT NULL,
   description   TEXT,
@@ -30,7 +30,17 @@ CREATE TABLE IF NOT EXISTS equipment (
 --   is_banned     INTEGER NOT NULL DEFAULT 0,
 --   has_discount  INTEGER NOT NULL DEFAULT 0
 -- ============================================================
-
+CREATE TABLE IF NOT EXISTS customers (
+  customer_id   INTEGER PRIMARY KEY,
+  last_name     TEXT NOT NULL,
+  first_name    TEXT NOT NULL,
+  contact_phone TEXT,
+  email         TEXT,
+  is_banned     INTEGER NOT NULL DEFAULT 0
+                CHECK (is_banned IN (0, 1)),
+  has_discount  INTEGER NOT NULL DEFAULT 0
+                CHECK (has_discount IN (0, 1))
+);
 
 -- ============================================================
 -- Member 3: append `rentals` and `rental_items` tables below this line.
@@ -41,3 +51,19 @@ CREATE TABLE IF NOT EXISTS equipment (
 --   rental_items(rental_item_id PK, rental_id FK -> rentals,
 --                equipment_id FK -> equipment, cost REAL)
 -- ============================================================
+
+CREATE TABLE IF NOT EXISTS rentals (
+    rental_id     INTEGER PRIMARY KEY,
+    customer_id   INTEGER NOT NULL REFERENCES customers(customer_id),
+    date_created  TEXT NOT NULL,
+    rental_date   TEXT NOT NULL,
+    return_date   TEXT NOT NULL,
+    total_cost    REAL NOT NULL CHECK (total_cost >= 0)
+    );
+
+CREATE TABLE IF NOT EXISTS rental_items (
+    rental_item_id INTEGER PRIMARY KEY,
+     rental_id     INTEGER NOT NULL REFERENCES rentals(rental_id) ON DELETE CASCADE,
+    equipment_id   INTEGER NOT NULL REFERENCES equipment(equipment_id),
+    cost           REAL NOT NULL CHECK (cost >= 0)
+    );
