@@ -15,7 +15,7 @@ import { Router } from 'express';
 import { ok, created, badRequest, notFound } from '../util.js';
  
 const router = Router();
- 
+  
 function parseIsoDate(value) {
   if (typeof value !== 'string' || !value.trim()) return null;
   const date = new Date(`${value}T00:00:00`);

@@ -34,7 +34,7 @@ function execFile(filePath) {
  
   for (const stmt of statements) {
     db.run(stmt);
-  }
+  } 
 }
  
 execFile(schemaPath);

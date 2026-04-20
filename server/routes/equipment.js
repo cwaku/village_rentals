@@ -9,7 +9,7 @@ const DELETE_STATUSES = ['SOLD', 'DAMAGED'];
 
 const BASE_SQL = `
   SELECT
-    e.equipment_id,
+    e.equipment_id, 
     e.category_id,
     c.name AS category_name,
     e.name,
