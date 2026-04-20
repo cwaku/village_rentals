@@ -9,7 +9,7 @@
 // and needs to read has_discount to apply the 10% discount at rental time.
 import { getDb, query, run } from '../db.js';
 import { Router } from 'express';
-import { ok } from '../util.js';
+import { ok, created, badRequest, notFound } from '../util.js';
 
 const router = Router();
 
