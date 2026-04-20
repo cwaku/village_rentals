@@ -30,9 +30,9 @@ To reset the database to clean seed state at any time, re-run `npm run db:init`.
 | Area | Owner | Status |
 |---|---|---|
 | Equipment management (add, soft-delete, list, filter) | Member 1 | Done |
-| Customer management (add, update, ban/discount flags, list) | Member 2 | In progress |
-| Rental processing (create rental, availability + ban checks, discount, totals) | Member 3 | In progress |
-| Main GUI wiring, persistence integrity, submission packaging, demo video | Member 4 | In progress |
+| Customer management (add, update, ban/discount flags, list) | Member 2 | Done |
+| Rental processing (create rental, availability + ban checks, discount, totals) | Member 3 | Done |
+| Main GUI wiring, persistence integrity, submission packaging, demo video | Member 4 | Done |
 
 ## Project Structure
 
